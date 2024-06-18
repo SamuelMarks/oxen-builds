@@ -1,0 +1,7 @@
+FROM gcr.io/distroless/cc-debian12
+WORKDIR /bin
+# Download `oxen-server-ubuntu-latest.deb` and extract `oxen-server`
+# E.g., https://github.com/Oxen-AI/Oxen/releases/download/v0.15.15/oxen-ubuntu-latest.deb
+ADD oxen-server .
+EXPOSE 3000
+ENTRYPOINT ["/bin/oxen-server", "start"]
