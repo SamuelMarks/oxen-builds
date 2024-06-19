@@ -1,0 +1,13 @@
+FROM rust:alpine AS builder
+
+ENV OPENSSL_DIR=/usr
+RUN apk --no-cache add ruby-dev ffmpeg-libavdevice ffmpeg-libavcodec libressl-dev dbus-libs clang-dev g++ git make cmake ninja linux-headers
+RUN cc --version
+WORKDIR /usr/src/oxen
+COPY . .
+RUN cargo build --locked --release && \
+    mv /usr/src/oxen/target/release/oxen /bin/oxen
+
+FROM alpine
+COPY --from=builder /bin/oxen /bin/
+CMD ["/bin/oxen"]
