@@ -1,7 +1,13 @@
+FROM busybox:stable-musl AS downloader_extractor
+
+ADD https://github.com/Oxen-AI/Oxen/releases/download/v0.15.16/oxen-server-ubuntu-latest.deb .
+RUN ar x oxen-server-ubuntu-latest.deb && \
+    tar xzf data.tar.gz
+
 FROM gcr.io/distroless/cc-debian12
 WORKDIR /bin
-# Download `oxen-server-ubuntu-latest.deb` and extract `oxen-server`
-# E.g., https://github.com/Oxen-AI/Oxen/releases/download/v0.15.15/oxen-ubuntu-latest.deb
-ADD oxen-server .
+# Fallsback to in-memory 1st-party db
+ENV REDIS_URL "redis://localhost:6379"
+COPY --from=downloader_extractor /usr/bin/oxen-server .
 EXPOSE 3000
 ENTRYPOINT ["/bin/oxen-server", "start"]
