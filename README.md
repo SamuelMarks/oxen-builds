@@ -1,6 +1,7 @@
 Oxen builds
 ===========
 [![Docker Image Version (tag)](https://img.shields.io/docker/v/samuelmarks/oxen-builds/distroless_cc-debian12_oxen_server_v0.15.16)](https://hub.docker.com/r/samuelmarks/oxen-builds/tags)
+[![docker_build](https://github.com/SamuelMarks/oxen-builds/actions/workflows/docker_build.yml/badge.svg)](https://github.com/SamuelMarks/oxen-builds/actions/workflows/docker_build.yml)
 
 Builds for https://github.com/Oxen-AI/Oxen
 
