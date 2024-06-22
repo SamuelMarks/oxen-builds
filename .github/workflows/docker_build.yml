@@ -24,9 +24,9 @@ jobs:
       - uses: dorny/paths-filter@v3
         id: changes
         with:
-        filters: |
-          Dockerfile:
-            - 'Dockerfile*'
+          filters: |
+            Dockerfile:
+              - 'Dockerfile*'
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
