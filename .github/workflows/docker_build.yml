@@ -57,6 +57,6 @@ jobs:
           file: Dockerfile.distroless
           tags: |
             samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_latest
-            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${OXEN_VERSION}
+            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${{ needs.prepare.outputs.oxen_version }}
         env:
           OXEN_VERSION: ${{ needs.prepare.outputs.oxen_version }}
