@@ -8,6 +8,8 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    outputs:
+      oxen_version: ${{ steps.version.outputs.oxen_version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,7 +23,8 @@ jobs:
           sed -i '/^ARG OXEN_VERSION=/c\ARG OXEN_VERSION='"$version" Dockerfile.distroless
           # Don't run next `step` if Dockerfile unchanged
           # git diff --exit-code Dockerfile.distroless >/dev/null && >&2 echo 'No Dockerfile changes made' && exit 3
-          printf '%s\n' "$version"
+          printf 'oxen_version=%s\n' "$version"
+
       - uses: dorny/paths-filter@v3
         id: changes
         with:
@@ -52,5 +55,7 @@ jobs:
           file: Dockerfile.distroless
           tags: |
             samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_latest
-            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${{ steps.version }}
+            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_$VERSION
+        env:
+          OXEN_VERSION: ${{ steps.version.outputs.oxen_version }}
 #        if: steps.changes.outputs.Dockerfile == 'true'
