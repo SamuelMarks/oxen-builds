@@ -9,13 +9,13 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     outputs:
-      oxen_version: ${{ steps.version.outputs.oxen_version }}
+      oxen_version: ${{ steps.oxen_version.outputs.oxen_version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Modify Dockerfile with latest version
-        id: version
+        id: oxen_version
         shell: bash
         run: |
           version="$(curl -s https://api.github.com/repos/Oxen-AI/Oxen/releases/latest | jq -r .tag_name)"
@@ -55,5 +55,7 @@ jobs:
           file: Dockerfile.distroless
           tags: |
             samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_latest
-            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${{ steps.outputs.oxen_version }}
+            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${OXEN_VERSION}
+        env:
+          OXEN_VERSION: ${{ steps.oxen_version.outputs.oxen_version }}
 #        if: steps.changes.outputs.Dockerfile == 'true'
