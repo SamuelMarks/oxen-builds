@@ -57,5 +57,5 @@ jobs:
             samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_latest
             samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_$OXEN_VERSION
         env:
-          OXEN_VERSION: ${{ jobs.docker.outputs.oxen_version }}
+          OXEN_VERSION: ${{ jobs.docker.steps.version.outputs.oxen_version }}
 #        if: steps.changes.outputs.Dockerfile == 'true'
