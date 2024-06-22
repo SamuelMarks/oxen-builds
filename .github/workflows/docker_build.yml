@@ -50,7 +50,7 @@ jobs:
           context: .
           push: true
           file: Dockerfile.distroless
-          tags:
-            - samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_latest
-            - samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${steps.version}
+          tags: |
+            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_latest
+            samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${{ steps.version }}
 #        if: steps.changes.outputs.Dockerfile == 'true'
