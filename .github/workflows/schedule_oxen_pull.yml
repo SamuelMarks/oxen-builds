@@ -1,0 +1,34 @@
+name: schedule_oxen_pull
+
+on:
+  schedule:
+    # At 05:30 on Sunday
+    - cron:  '30 5 * * 7'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        path: oxen-builds
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        repository: Oxen-AI/Oxen
+        path: oxen
+
+      - name: Trigger other workflows by `push`ing a new `commit` on new release
+        shell: bash
+        run: |
+          msg="$(GIT_DIR=oxen/.git git log -1 --pretty='format:%h\t%B')"
+          cd oxen-builds
+          if ! grep -qF "$version" 'RELEASE'; then
+            version="$(curl -s https://api.github.com/repos/Oxen-AI/Oxen/releases/latest | jq -r .tag_name)"
+            sed -i '/^ARG OXEN_VERSION=/c\ARG OXEN_VERSION='"$version" Dockerfile.distroless
+            if ! git diff --exit-code Dockerfile.distroless >/dev/null
+              printf '%s\n' "$msg" >> 'RELEASE'
+              git commit -am "$msg"
+              git push origin master
+            fi
+          fi
