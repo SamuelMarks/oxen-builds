@@ -2,8 +2,7 @@ name: schedule_oxen_pull
 
 on:
   schedule:
-    # At 05:30 on Sunday
-    - cron:  '30 5 * * 7'
+    - cron:  '30 5 * * 1,7'
 
 jobs:
   docker:
