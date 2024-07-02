@@ -11,12 +11,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        path: oxen-builds
+        with:
+          path: oxen-builds
 
       - name: Checkout
         uses: actions/checkout@v4
-        repository: Oxen-AI/Oxen
-        path: oxen
+        with:
+          repository: Oxen-AI/Oxen
+          path: oxen
 
       - name: Trigger other workflows by `push`ing a new `commit` on new release
         shell: bash
