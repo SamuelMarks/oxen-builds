@@ -28,7 +28,7 @@ jobs:
           if ! grep -qF "$version" 'RELEASE'; then
             version="$(curl -s https://api.github.com/repos/Oxen-AI/Oxen/releases/latest | jq -r .tag_name)"
             sed -i '/^ARG OXEN_VERSION=/c\ARG OXEN_VERSION='"$version" Dockerfile.distroless
-            if ! git diff --exit-code Dockerfile.distroless >/dev/null
+            if ! git diff --exit-code Dockerfile.distroless >/dev/null; then
               printf '%s\n' "$msg" >> 'RELEASE'
               git commit -am "$msg"
               git push origin master
