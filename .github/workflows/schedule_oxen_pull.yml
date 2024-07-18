@@ -2,8 +2,8 @@ name: schedule_oxen_pull
 
 on:
   schedule:
-    # 12:34AM every Tuesday
-    - cron:  '34 12 * * TUE'
+    # 12:34AM every Thursday
+    - cron:  '34 12 * * THU'
 
 jobs:
   docker:
