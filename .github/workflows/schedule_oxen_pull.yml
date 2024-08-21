@@ -27,9 +27,9 @@ jobs:
         shell: bash
         run: |
           msg="$(GIT_DIR=oxen/.git git log -1 --pretty='format:%h\t%B')"
-          cd oxen-builds
-          if ! grep -qF "$version" 'RELEASE'; then
-            version="$(curl -s https://api.github.com/repos/Oxen-AI/Oxen/releases/latest | jq -r .tag_name)"
+          version="$(curl -s https://api.github.com/repos/Oxen-AI/Oxen/releases/latest | jq -r .tag_name)"
+          if ! grep -qF "$version" 'oxen-builds/RELEASE'; then
+            cd oxen-builds
             sed -i '/^ARG OXEN_VERSION=/c\ARG OXEN_VERSION='"$version" Dockerfile.distroless
             if ! git diff --exit-code Dockerfile.distroless >/dev/null; then
               printf '%s\n' "$msg" >> 'RELEASE'
