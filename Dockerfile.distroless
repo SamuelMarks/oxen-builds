@@ -1,6 +1,6 @@
 FROM busybox:stable-musl AS downloader_extractor
 
-ARG OXEN_VERSION=v0.15.16
+ARG OXEN_VERSION=v0.18.15
 ADD https://github.com/Oxen-AI/Oxen/releases/download/${OXEN_VERSION}/oxen-server-ubuntu-latest.deb .
 RUN ar x oxen-server-ubuntu-latest.deb && \
     tar xzf data.tar.gz

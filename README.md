@@ -14,19 +14,19 @@ For Docker images, see: https://hub.docker.com/r/samuelmarks/oxen-builds
 ### Docker build
 
 Download the .deb file:
-E.g., https://github.com/Oxen-AI/Oxen/releases/download/v0.15.16/oxen-ubuntu-latest.deb
+E.g., https://github.com/Oxen-AI/Oxen/releases/download/v0.18.15/oxen-ubuntu-latest.deb
 
 Extract out `oxen-server`. Now you can run:
 ```sh
-docker build -f Dockerfile.distroless -t samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_v0.15.16 .
+docker build -f Dockerfile.distroless -t samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_v0.18.15 .
 ```
 
 Then to `run` you simply:
 ```sh
-docker run samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_v0.15.16
+docker run samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_v0.18.15
 ```
 
 And to `push` up to hub.docker.com run:
 ```sh
-docker push samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_v0.15.16
+docker push samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_v0.18.15
 ```

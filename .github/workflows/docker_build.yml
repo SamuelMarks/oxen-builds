@@ -57,5 +57,3 @@ jobs:
           tags: |
             samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_latest
             samuelmarks/oxen-builds:distroless_cc-debian12_oxen_server_${{ steps.oxen_version.outputs.oxen_version }}
-        env:
-          OXEN_VERSION: ${{ steps.oxen_version.outputs.oxen_version }}
