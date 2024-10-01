@@ -8,7 +8,7 @@ RUN ar x oxen-server-ubuntu-latest.deb && \
 FROM gcr.io/distroless/cc-debian12
 WORKDIR /bin
 # Fallsback to in-memory 1st-party db
-ENV REDIS_URL "redis://localhost:6379"
+ENV REDIS_URL="redis://localhost:6379"
 COPY --from=downloader_extractor /usr/bin/oxen-server .
 EXPOSE 3000
 ENTRYPOINT ["/bin/oxen-server", "start"]
