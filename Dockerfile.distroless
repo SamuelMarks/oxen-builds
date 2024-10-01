@@ -1,8 +1,8 @@
 FROM busybox:stable-musl AS downloader_extractor
 
-ARG OXEN_VERSION=v0.18.15
-ADD https://github.com/Oxen-AI/Oxen/releases/download/${OXEN_VERSION}/oxen-server-ubuntu-latest.deb .
-RUN ar x oxen-server-ubuntu-latest.deb && \
+ARG OXEN_VERSION=v0.18.18
+ADD https://github.com/Oxen-AI/Oxen/releases/download/${OXEN_VERSION}/oxen-server-ubuntu-22.04.deb .
+RUN ar x oxen-server-ubuntu-22.04.deb && \
     tar xzf data.tar.gz
 
 FROM gcr.io/distroless/cc-debian12
